@@ -1,103 +1,185 @@
-# Lights Out Terminal Solver
+<div align="center">
 
-A polished offline **Lights Out** puzzle app with a cyber-terminal interface, custom map builder, portable map format, and a GF(2) auto-solver.
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:020807,50:33ff97,100:00d9ff&height=180&section=header&text=Lights%20Out%20GF(2)%20Solver&fontColor=d8ffe9&fontSize=38&fontAlignY=38&desc=Offline%20Terminal%20Puzzle%20Engine%20%7C%20Map%20Builder%20%7C%20Auto%20Solver&descAlignY=58&animation=fadeIn" alt="Lights Out GF(2) Solver Header" />
 
-Built by **THELOUISMAHDI**  
-GitHub: https://github.com/THELOUISMAHDI
+<img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=700&size=20&duration=2800&pause=700&color=33FF97&center=true&vCenter=true&width=760&lines=Linear+Algebra+meets+Lights+Out;GF(2)+Gaussian+Elimination+Solver;Custom+Map+Builder+%2B+Auto+Solve+Engine;Fully+Offline+Vanilla+JavaScript+App" alt="Animated terminal typing intro" />
 
-## Project Background
+<br />
 
-This project originally started as a **Linear Algebra course assignment**.
+<a href="https://github.com/TheLouisMahdi/lights-out-gf2-solver/archive/refs/heads/main.zip">
+  <img src="https://img.shields.io/badge/DOWNLOAD_FULL_PROJECT-ZIP-33ff97?style=for-the-badge&logo=github&logoColor=020807" alt="Download full project ZIP" />
+</a>
 
-The first version was intended to generate and solve simple `3×3` or `5×5` Lights Out boards.  
-Later, the project was expanded into a more complete puzzle engine with:
+<a href="https://github.com/TheLouisMahdi/lights-out-gf2-solver">
+  <img src="https://img.shields.io/badge/VIEW_ON-GITHUB-00d9ff?style=for-the-badge&logo=github&logoColor=020807" alt="View on GitHub" />
+</a>
 
-- custom board generation
-- manual map editing
-- solvability checking
-- automatic solving
-- portable map input/output
-- support for multiple board sizes from `0×0` to `30×30`
+<br />
+<br />
 
-The final UI, layout, documentation structure, and visual polish were refined with help from ChatGPT, while the project idea, implementation direction, and algorithm-focused development were shaped around the original coursework goal.
+<img src="https://img.shields.io/badge/HTML-Offline_App-33ff97?style=flat-square" />
+<img src="https://img.shields.io/badge/CSS-Cyber_Terminal_UI-00d9ff?style=flat-square" />
+<img src="https://img.shields.io/badge/JavaScript-Vanilla-f7df1e?style=flat-square" />
+<img src="https://img.shields.io/badge/Algorithm-GF(2)_Gaussian_Elimination-ff3d71?style=flat-square" />
+
+</div>
+
+---
+
+## What is this?
+
+**Lights Out GF(2) Solver** is an offline browser-based puzzle engine for the classic **Lights Out** game.
+
+It includes:
+
+- a playable Lights Out board,
+- a custom map builder,
+- a portable text-based map format,
+- a solvability checker,
+- and an automatic solver based on **linear algebra over GF(2)**.
+
+The interface is styled like a cyber-terminal dashboard, but the core of the project is mathematical: it turns a puzzle board into a binary linear system and solves it.
+
+---
+
+## Important: download the full project, not only `index.html`
+
+This app is split into multiple files:
+
+```txt
+index.html
+styles.css
+app.js
+README.md
+```
+
+To run it correctly, download the **entire project folder**.
+
+Do **not** download only `index.html`, because the page also needs:
+
+- `styles.css` for the interface, layout, terminal theme, and animations,
+- `app.js` for the game logic, map builder, parser, and solver engine.
+
+### Easiest way
+
+Click this button:
+
+<div align="center">
+
+<a href="https://github.com/TheLouisMahdi/lights-out-gf2-solver/archive/refs/heads/main.zip">
+  <img src="https://img.shields.io/badge/DOWNLOAD_FULL_PROJECT-ZIP-33ff97?style=for-the-badge&logo=github&logoColor=020807" alt="Download full project ZIP" />
+</a>
+
+</div>
+
+Then extract the ZIP and open:
+
+```txt
+index.html
+```
+
+in your browser.
+
+---
+
+## Project story
+
+This project started about **one to two years ago** as a simple **Linear Algebra course assignment**.
+
+The original goal was much smaller: generate a basic Lights Out board, mainly around `3×3` or `5×5`, and solve it using ideas from linear algebra.
+
+After that, I expanded it into a more complete tool:
+
+- added a real solver engine,
+- added support for more board sizes,
+- added custom map input/output,
+- added a separate builder mode,
+- added solvability detection,
+- and turned the project into a small offline puzzle engine.
+
+The final visual style, interface polish, README structure, and GitHub-ready presentation were improved with help from ChatGPT, while the project concept and algorithmic direction were based on my original coursework and development process.
+
+---
 
 ## Features
 
-- Play Lights Out from `0×0` to `30×30`
-- Generate random solvable puzzles
-- Build custom maps manually
-- Check whether a board is solvable
-- Generate a solution map
-- Auto-solve inside Play Mode or Solver Engine
-- Transfer maps between Builder, Solver, and Play Mode
-- Use a portable text-based map format
-- Fully offline frontend
-- No external dependencies
-- GitHub Pages ready
+### Play Mode
 
-## Modes
-
-### 1. Play Mode
-
-The normal Lights Out game mode.
+Play the normal Lights Out puzzle.
 
 Clicking a cell toggles:
 
-- the selected cell
-- the cell above
-- the cell below
-- the cell on the left
-- the cell on the right
+- the selected cell,
+- the cell above,
+- the cell below,
+- the left neighbor,
+- the right neighbor.
 
 Available actions:
 
-- generate a new puzzle
-- reset the current puzzle
-- check solvability
-- get a hint
-- auto-solve the board
+- generate a new puzzle,
+- reset the board,
+- check solvability,
+- get a hint,
+- auto-solve the current board.
 
-### 2. Map Builder
+### Map Builder
 
-A manual board editor.
+Create your own board manually.
 
-In this mode, clicking a cell toggles **only that cell**, not its neighbors.  
-This makes it easy to create custom puzzle states and then transfer them into Play Mode.
-
-Available actions:
-
-- clear the board
-- create a random layout
-- check whether the custom map is solvable
-- export the map as text
-- copy the map
-- load a map from text
-- transfer the map to Play Mode
-
-### 3. Solver Engine
-
-A dedicated solving workspace.
-
-You can paste any valid square Lights Out map, check whether it is solvable, generate a solution map, and auto-solve the board directly inside the engine.
+In this mode, clicking a cell toggles **only that cell**, so you can design a custom puzzle state.
 
 Available actions:
 
-- create a blank board by size
-- create a random solvable input
-- load and check a map
-- auto-solve inside the solver
-- copy the solution map
-- transfer input to Play Mode
+- clear the board,
+- create a random layout,
+- check whether the map is solvable,
+- export the map as text,
+- copy the map,
+- load a map from text,
+- transfer the map to Play Mode.
 
-## Map Format
+### Solver Engine
 
-Header format:
+Paste or generate a board and let the solver analyze it.
+
+Available actions:
+
+- load a custom board,
+- check if it is solvable,
+- generate a solution map,
+- auto-solve inside the solver screen,
+- transfer the board to Play Mode.
+
+---
+
+## Supported board sizes
+
+The app supports board sizes from:
+
+```txt
+0×0 to 30×30
+```
+
+Notes:
+
+- `0×0` is treated as a safe empty boundary case.
+- Real playable boards start from `1×1`.
+- Larger boards use the same GF(2) solver engine.
+
+---
+
+## Map format
+
+You can share or load boards using a compact text format.
+
+### Header format
 
 ```txt
 5x5:01010/00100/11100/00010/01001
 ```
 
-Multiline format:
+### Multiline format
 
 ```txt
 01010
@@ -107,31 +189,53 @@ Multiline format:
 01001
 ```
 
-In a board map:
+For a board map:
 
 ```txt
 1 = light is on
 0 = light is off
 ```
 
-In a solution map:
+For a solution map:
 
 ```txt
 1 = this cell should be pressed
 0 = this cell should not be pressed
 ```
 
-Example solution output:
+---
+
+## The math behind the solver
+
+Lights Out can be represented as a linear system over **GF(2)**.
+
+GF(2) means a field with only two values:
 
 ```txt
-5x5:00000/01000/00110/00000/10001
+0 and 1
 ```
 
-## Algorithm Highlights
+This is perfect for Lights Out because each light has only two states:
 
-The solver is based on **linear algebra over GF(2)**.
+```txt
+0 = off
+1 = on
+```
 
-Lights Out can be modeled as a binary linear system:
+Pressing a cell toggles affected cells:
+
+```txt
+0 -> 1
+1 -> 0
+```
+
+That is the same as XOR, or addition modulo 2.
+
+---
+
+## Linear system model
+
+The board is modeled as:
 
 ```txt
 A × x = b
@@ -139,138 +243,163 @@ A × x = b
 
 Where:
 
-- `A` is the toggle-effect matrix
-- `x` is the unknown press vector
-- `b` is the current board state
-- all operations are performed over GF(2), meaning values are only `0` or `1`
+| Symbol | Meaning |
+|---|---|
+| `A` | Toggle-effect matrix |
+| `x` | Unknown press vector |
+| `b` | Current board state |
 
-### Why GF(2)?
+Each column of `A` describes what happens when one specific cell is pressed.
 
-Each cell has only two states:
-
-```txt
-0 = off
-1 = on
-```
-
-Pressing a cell toggles affected lights:
+The solver tries to find `x`, meaning:
 
 ```txt
-0 -> 1
-1 -> 0
+which cells should be pressed to turn all lights off
 ```
 
-This is exactly XOR behavior, which matches arithmetic modulo 2.
+---
 
-### Solver Method
+## Algorithm details
 
-The project uses **Gaussian elimination over GF(2)**.
+The solver uses **Gaussian elimination over GF(2)**.
 
-Instead of storing the matrix as a normal 2D numeric array, each row is represented as a `BigInt` bitset.  
-This makes binary row operations compact and efficient:
+Instead of normal arithmetic, every operation is binary:
+
+```txt
+1 + 1 = 0
+1 + 0 = 1
+0 + 0 = 0
+```
+
+In JavaScript, this is naturally handled with XOR operations.
+
+The implementation also stores matrix rows as `BigInt` bitsets, so row elimination can be done compactly:
 
 ```js
 A[r] ^= A[row];
 ```
 
-That single XOR operation performs a full binary row elimination step.
+That single operation applies a binary row elimination step.
 
-### Solvability Detection
+---
 
-The same elimination process detects whether a puzzle is solvable.
+## Solvability detection
 
-If elimination produces a row where:
+The same Gaussian elimination process also checks whether a board is solvable.
+
+If elimination produces a contradiction like this:
 
 ```txt
-left side = 0
-right side = 1
+0 = 1
 ```
 
-then the system is inconsistent and the board is not solvable.
+then the puzzle is impossible to solve.
 
-In code, that state is detected and returns:
+In code, that state is detected and the solver returns:
 
 ```js
 null
 ```
 
-Otherwise, the solver returns a valid press path.
+If there is no contradiction, the solver returns a valid press path.
 
-### Guaranteed Solvable Puzzle Generation
+---
 
-Random puzzles in Play Mode are generated by starting from an all-off board and applying random valid presses.
+## Puzzle generation logic
 
-Because the puzzle is created from real moves, it is guaranteed to be reachable from the solved state.  
+Random puzzles in Play Mode are generated from the solved state.
+
+The app starts with an all-off board, then applies a set of random valid presses.
+
+Because the puzzle is created by real moves, it is guaranteed to be reachable from the solved state.
+
 The solver is still used afterward as a safety check.
 
-### Board Size Handling
+---
 
-The app supports board sizes from `0×0` to `30×30`.
+## Is the solution always the shortest?
 
-Notes:
+No.
 
-- `0×0` is treated as a safe empty boundary case.
-- Real playable puzzles start from `1×1`.
-- Larger boards are supported by the same GF(2) engine.
-- The solution is valid, but not guaranteed to be the minimum-move solution.
+The solver returns a **valid solution**, not necessarily the minimum-move solution.
 
-## Important Notes
+Finding the absolute shortest solution can be much more expensive, especially for larger boards.
 
-This solver returns **a valid solution**, not necessarily the shortest possible solution.
+For this project, the priority was:
 
-Finding the absolute minimum-move solution can be significantly more expensive, especially for larger board sizes.  
-For this project, reliability, clarity, and broad board-size support were prioritized.
+- correctness,
+- reliable solvability checking,
+- broad board-size support,
+- clean implementation,
+- and a useful interactive interface.
 
-## Tech Stack
+---
+
+## How to run
+
+### Option 1: Download ZIP
+
+1. Click the **Download Full Project ZIP** button near the top of this README.
+2. Extract the ZIP file.
+3. Open `index.html` in your browser.
+
+### Option 2: Clone the repository
+
+```bash
+git clone https://github.com/TheLouisMahdi/lights-out-gf2-solver.git
+cd lights-out-gf2-solver
+```
+
+Then open:
+
+```txt
+index.html
+```
+
+---
+
+## File structure
+
+```txt
+lights-out-gf2-solver/
+├── index.html
+├── styles.css
+├── app.js
+└── README.md
+```
+
+---
+
+## Tech stack
 
 - HTML
 - CSS
 - Vanilla JavaScript
 - BigInt bitset operations
-- No external libraries
+- No external runtime dependencies
 - No build step
 
-## How to Run
-
-Open `index.html` in a browser.
-
-## GitHub Pages
-
-To publish with GitHub Pages:
-
-1. Upload these files to the repository root:
-
-```txt
-index.html
-styles.css
-app.js
-README.md
-```
-
-2. Go to repository settings.
-3. Open **Pages**.
-4. Select the default branch and root folder.
-5. Save.
-
-## Suggested Repository Name
-
-Recommended:
-
-```txt
-lights-out-terminal-solver
-```
-
-Alternative names:
-
-```txt
-lights-out-gf2-solver
-linear-algebra-lights-out
-lights-out-puzzle-engine
-lights-out-map-solver
-```
+---
 
 ## Credits
 
-Designed and developed by **THELOUISMAHDI**.
+Developed by **THELOUISMAHDI**.
 
-The final interface polish, README organization, and presentation structure were refined with assistance from ChatGPT.
+This project began as a simple Linear Algebra assignment and was later expanded into a complete Lights Out solving engine.
+
+The final UI polish, cyber-terminal presentation, and README organization were refined with assistance from ChatGPT.
+
+<div align="center">
+
+<br />
+
+<a href="https://github.com/TheLouisMahdi">
+  <img src="https://img.shields.io/badge/THELOUISMAHDI-GitHub_Profile-33ff97?style=for-the-badge&logo=github&logoColor=020807" alt="THELOUISMAHDI GitHub Profile" />
+</a>
+
+<br />
+<br />
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:020807,50:33ff97,100:00d9ff&height=120&section=footer" alt="Footer" />
+
+</div>
