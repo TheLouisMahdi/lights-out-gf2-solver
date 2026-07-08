@@ -6,12 +6,16 @@
 
 <br />
 
+<a href="https://thelouismahdi.github.io/lights-out-gf2-solver/">
+  <img src="https://img.shields.io/badge/PLAY_ONLINE-LIVE_DEMO-33ff97?style=for-the-badge&logo=githubpages&logoColor=020807" alt="Play Online" />
+</a>
+
 <a href="https://github.com/TheLouisMahdi/lights-out-gf2-solver/archive/refs/heads/main.zip">
-  <img src="https://img.shields.io/badge/DOWNLOAD_FULL_PROJECT-ZIP-33ff97?style=for-the-badge&logo=github&logoColor=020807" alt="Download full project ZIP" />
+  <img src="https://img.shields.io/badge/DOWNLOAD_FULL_PROJECT-ZIP-00d9ff?style=for-the-badge&logo=github&logoColor=020807" alt="Download full project ZIP" />
 </a>
 
 <a href="https://github.com/TheLouisMahdi/lights-out-gf2-solver">
-  <img src="https://img.shields.io/badge/VIEW_ON-GITHUB-00d9ff?style=for-the-badge&logo=github&logoColor=020807" alt="View on GitHub" />
+  <img src="https://img.shields.io/badge/VIEW_ON-GITHUB-111827?style=for-the-badge&logo=github&logoColor=33ff97" alt="View on GitHub" />
 </a>
 
 <br />
@@ -26,17 +30,59 @@
 
 ---
 
+## 3×3 Fun Preview
+
+This tiny board is just a visual preview for fun. GitHub README files cannot run the full JavaScript game directly, so use the **Play Online** button for the real interactive version.
+
+<div align="center">
+
+<table>
+  <tr>
+    <td align="center">🟩</td>
+    <td align="center">⬛</td>
+    <td align="center">🟩</td>
+  </tr>
+  <tr>
+    <td align="center">⬛</td>
+    <td align="center">🟩</td>
+    <td align="center">⬛</td>
+  </tr>
+  <tr>
+    <td align="center">🟩</td>
+    <td align="center">⬛</td>
+    <td align="center">🟩</td>
+  </tr>
+</table>
+
+<a href="https://thelouismahdi.github.io/lights-out-gf2-solver/">
+  <img src="https://img.shields.io/badge/OPEN_REAL_INTERACTIVE_GAME-33ff97?style=for-the-badge&logo=githubpages&logoColor=020807" alt="Open real interactive game" />
+</a>
+
+</div>
+
+---
+
 ## Overview
 
 **Lights Out GF(2) Solver** is an offline browser-based Lights Out puzzle engine with a cyber-terminal interface, custom map builder, portable map format, and automatic solver.
 
-The app is designed for both normal users who want to play the puzzle and students/developers who want to see how a Lights Out board can be solved using **linear algebra over GF(2)**.
+It is designed for normal users who want to play the puzzle and for students/developers who want to see how a Lights Out board can be solved using **linear algebra over GF(2)**.
 
 ---
 
 ## Quick Start
 
-This project is split into multiple files, so download or clone the **full repository**, not only `index.html`.
+### Option 1: Play online
+
+Open the live version here:
+
+```txt
+https://thelouismahdi.github.io/lights-out-gf2-solver/
+```
+
+### Option 2: Download the full project
+
+This project is split into multiple files, so download the **full repository**, not only `index.html`.
 
 Required files:
 
@@ -53,7 +99,7 @@ After downloading:
 2. Keep all files in the same folder.
 3. Open `index.html` in your browser.
 
-Clone option:
+### Option 3: Clone the repository
 
 ```bash
 git clone https://github.com/TheLouisMahdi/lights-out-gf2-solver.git
