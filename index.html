@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Lights Out Terminal Solver: an offline GF(2) puzzle engine, map builder, and auto-solver for 0x0 to 30x30 boards." />
+  <title>Lights Out Terminal Solver</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="app.js" defer></script>
+</head>
+
+<body>
+  <div class="ambient-grid"></div>
+  <div class="scanline"></div>
+
+  <main class="app-shell">
+    <header class="hero terminal-card">
+      <div class="hero-copy">
+        <span class="eyebrow">LOCAL // OFFLINE // GF(2) ENGINE // SIZE 0-30</span>
+        <h1>Lights Out Terminal Solver</h1>
+        <p>
+          Play, build custom maps, transfer boards, and solve Lights Out puzzles from 0×0 to 30×30.
+        </p>
+      </div>
+
+      <div class="hero-orb" aria-hidden="true">
+        <span></span>
+      </div>
+    </header>
+
+    <nav class="tabs terminal-card" aria-label="Application sections">
+      <button id="tab-play" class="tab active" type="button" data-view="play">
+        <span>01</span>
+        Play
+      </button>
+      <button id="tab-builder" class="tab" type="button" data-view="builder">
+        <span>02</span>
+        Map Builder
+      </button>
+      <button id="tab-solver" class="tab" type="button" data-view="solver">
+        <span>03</span>
+        Solver Engine
+      </button>
+    </nav>
+
+    <section class="panel terminal-card active" id="play-panel">
+      <div class="panel-head">
+        <div>
+          <h2>Play Mode</h2>
+          <p>Clicking a cell toggles itself plus its four orthogonal neighbors.</p>
+        </div>
+        <span class="panel-chip">PLAY MODE</span>
+      </div>
+
+      <div class="toolbar">
+        <label class="field">
+          <span>Size</span>
+          <select id="size" aria-label="Play board size"></select>
+        </label>
+
+        <button id="new" type="button">New Puzzle</button>
+        <button id="reset" type="button">Reset</button>
+        <button id="check" type="button">Check Solvability</button>
+        <button id="hint-btn" type="button">Hint</button>
+        <button id="solve" class="primary-action" type="button" data-kind="playSolve">Auto Solve</button>
+      </div>
+    </section>
+
+    <section class="panel terminal-card" id="builder-panel">
+      <div class="panel-head">
+        <div>
+          <h2>Custom Map Builder</h2>
+          <p>In this mode, clicking a cell toggles only that cell. Then you can validate or transfer the map to Play Mode.</p>
+        </div>
+        <span class="panel-chip">MAP BUILDER</span>
+      </div>
+
+      <div class="toolbar">
+        <label class="field">
+          <span>Size</span>
+          <select id="builder-size" aria-label="Builder board size"></select>
+        </label>
+
+        <button id="builder-clear" type="button">Clear</button>
+        <button id="builder-random" type="button">Random Layout</button>
+        <button id="builder-check" type="button">Check Map</button>
+        <button id="builder-to-play" class="primary-action" type="button">Transfer to Play</button>
+      </div>
+
+      <div class="map-box">
+        <div class="map-head">
+          <div>
+            <strong>Map Output</strong>
+            <small>Portable format: 5x5:01010/00100/...</small>
+          </div>
+          <div class="map-actions">
+            <button id="builder-map-refresh" type="button">Generate Map</button>
+            <button id="builder-map-copy" type="button">Copy Map</button>
+            <button id="builder-map-load" type="button">Load from Map</button>
+          </div>
+        </div>
+        <textarea id="builder-map-text" spellcheck="false" placeholder="5x5:01010/00100/11100/00010/01001"></textarea>
+      </div>
+    </section>
+
+    <section class="panel terminal-card" id="solver-panel">
+      <div class="panel-head">
+        <div>
+          <h2>Solver Engine</h2>
+          <p>Paste any square board from 0 to 30, or generate a blank/random input with the selected size.</p>
+        </div>
+        <span class="panel-chip">SOLVER ENGINE</span>
+      </div>
+
+      <div class="toolbar solver-size-bar">
+        <label class="field">
+          <span>Engine Size</span>
+          <select id="solver-size" aria-label="Solver board size"></select>
+        </label>
+        <button id="solver-blank" type="button">Create Blank Board</button>
+        <button id="solver-random" type="button">Random Solvable Input</button>
+      </div>
+
+      <div class="solver-layout">
+        <div class="map-box">
+          <div class="map-head">
+            <div>
+              <strong>Manual Input</strong>
+              <small>Example: 8x8:01010101/00010000/... or multiline binary rows.</small>
+            </div>
+          </div>
+          <textarea id="solver-input" spellcheck="false" placeholder="5x5:01010/00100/11100/00010/01001"></textarea>
+
+          <div class="toolbar compact">
+            <button id="solver-load" type="button">Load & Check</button>
+            <button id="solver-auto" class="primary-action" type="button" data-kind="solverAuto">Auto Solve Here</button>
+            <button id="solver-to-play" type="button">Transfer Input to Play</button>
+            <button id="solver-reset" type="button">Reset Engine</button>
+          </div>
+        </div>
+
+        <div class="map-box">
+          <div class="map-head">
+            <div>
+              <strong>Solution Output</strong>
+              <small>In this map, 1 means that cell should be pressed.</small>
+            </div>
+            <div class="map-actions">
+              <button id="solution-copy" type="button">Copy Solution</button>
+              <button id="solver-current-copy" type="button">Copy Current Map</button>
+            </div>
+          </div>
+          <textarea id="solution-output" spellcheck="false" readonly></textarea>
+          <div id="solution-list" class="solution-list">No solution has been generated yet.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="status-strip terminal-card">
+      <div id="counter">Moves: 0</div>
+      <div id="status">Status: Ready</div>
+    </section>
+
+    <section class="board-wrap terminal-card">
+      <div class="board-title">
+        <span id="board-mode-label">PLAY GRID</span>
+        <span id="board-size-label">5×5</span>
+      </div>
+      <div id="grid" aria-label="Lights Out board"></div>
+    </section>
+
+    <section class="terminal-console terminal-card">
+      <div class="console-head">
+        <span></span>
+        <strong>TERMINAL LOG</strong>
+      </div>
+      <div id="terminal-log"></div>
+    </section>
+
+    <section class="score-card terminal-card">
+      <h2>Scoreboard</h2>
+      <table id="score">
+        <thead>
+          <tr>
+            <th>Method</th>
+            <th>Moves</th>
+            <th>Time</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <footer class="signature terminal-card">
+      <span>Built by</span>
+      <a href="https://github.com/THELOUISMAHDI" target="_blank" rel="noopener noreferrer">THELOUISMAHDI</a>
+      <span class="signature-dot">•</span>
+      <span>Offline Lights Out GF(2) Solver</span>
+    </footer>
+  </main>
+</body>
+</html>
