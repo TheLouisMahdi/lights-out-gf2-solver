@@ -26,25 +26,19 @@
 
 ---
 
-## What is this?
+## Overview
 
-**Lights Out GF(2) Solver** is an offline browser-based puzzle engine for the classic **Lights Out** game.
+**Lights Out GF(2) Solver** is an offline browser-based Lights Out puzzle engine with a cyber-terminal interface, custom map builder, portable map format, and automatic solver.
 
-It includes:
-
-- a playable Lights Out board,
-- a custom map builder,
-- a portable text-based map format,
-- a solvability checker,
-- and an automatic solver based on **linear algebra over GF(2)**.
-
-The interface is styled like a cyber-terminal dashboard, but the core of the project is mathematical: it turns a puzzle board into a binary linear system and solves it.
+The app is designed for both normal users who want to play the puzzle and students/developers who want to see how a Lights Out board can be solved using **linear algebra over GF(2)**.
 
 ---
 
-## Important: download the full project, not only `index.html`
+## Quick Start
 
-This app is split into multiple files:
+This project is split into multiple files, so download or clone the **full repository**, not only `index.html`.
+
+Required files:
 
 ```txt
 index.html
@@ -53,133 +47,86 @@ app.js
 README.md
 ```
 
-To run it correctly, download the **entire project folder**.
+After downloading:
 
-Do **not** download only `index.html`, because the page also needs:
+1. Extract the ZIP file.
+2. Keep all files in the same folder.
+3. Open `index.html` in your browser.
 
-- `styles.css` for the interface, layout, terminal theme, and animations,
-- `app.js` for the game logic, map builder, parser, and solver engine.
+Clone option:
 
-### Easiest way
-
-Click this button:
-
-<div align="center">
-
-<a href="https://github.com/TheLouisMahdi/lights-out-gf2-solver/archive/refs/heads/main.zip">
-  <img src="https://img.shields.io/badge/DOWNLOAD_FULL_PROJECT-ZIP-33ff97?style=for-the-badge&logo=github&logoColor=020807" alt="Download full project ZIP" />
-</a>
-
-</div>
-
-Then extract the ZIP and open:
-
-```txt
-index.html
+```bash
+git clone https://github.com/TheLouisMahdi/lights-out-gf2-solver.git
+cd lights-out-gf2-solver
 ```
 
-in your browser.
+Then open `index.html`.
 
 ---
 
-## Project story
+## Project Background
 
-This project started about **one to two years ago** as a simple **Linear Algebra course assignment**.
+This project started about **one to two years ago** as a simple **Linear Algebra course assignment**. The original version was mainly intended to generate and solve small `3×3` or `5×5` Lights Out boards.
 
-The original goal was much smaller: generate a basic Lights Out board, mainly around `3×3` or `5×5`, and solve it using ideas from linear algebra.
+I later expanded it into a complete offline puzzle tool with a solver engine, custom map builder, board transfer system, solvability checker, and support for board sizes from `0×0` to `30×30`.
 
-After that, I expanded it into a more complete tool:
-
-- added a real solver engine,
-- added support for more board sizes,
-- added custom map input/output,
-- added a separate builder mode,
-- added solvability detection,
-- and turned the project into a small offline puzzle engine.
-
-The final visual style, interface polish, README structure, and GitHub-ready presentation were improved with help from ChatGPT, while the project concept and algorithmic direction were based on my original coursework and development process.
+The final interface polish, cyber-terminal visual style, and README presentation were refined with assistance from ChatGPT.
 
 ---
 
-## Features
+## Main Features
+
+| Feature | Description |
+|---|---|
+| Play Mode | Play Lights Out normally and solve boards manually. |
+| Map Builder | Create custom boards by toggling cells directly. |
+| Solver Engine | Paste or generate a board and solve it automatically. |
+| Solvability Check | Detect whether a board has a valid solution. |
+| Solution Map | Export a map where `1` means “press this cell”. |
+| Board Transfer | Move boards between Builder, Solver, and Play Mode. |
+| Offline Use | Runs locally in the browser with no external runtime dependencies. |
+
+---
+
+## Modes
 
 ### Play Mode
 
-Play the normal Lights Out puzzle.
+Clicking a cell toggles the selected cell plus its four orthogonal neighbors: up, down, left, and right.
 
-Clicking a cell toggles:
-
-- the selected cell,
-- the cell above,
-- the cell below,
-- the left neighbor,
-- the right neighbor.
-
-Available actions:
-
-- generate a new puzzle,
-- reset the board,
-- check solvability,
-- get a hint,
-- auto-solve the current board.
+You can generate a new puzzle, reset it, check solvability, get a hint, or auto-solve the current state.
 
 ### Map Builder
 
-Create your own board manually.
+Clicking a cell toggles **only that cell**, which makes it easy to design a custom Lights Out board.
 
-In this mode, clicking a cell toggles **only that cell**, so you can design a custom puzzle state.
-
-Available actions:
-
-- clear the board,
-- create a random layout,
-- check whether the map is solvable,
-- export the map as text,
-- copy the map,
-- load a map from text,
-- transfer the map to Play Mode.
+The created map can be checked, copied, loaded from text, or transferred directly into Play Mode.
 
 ### Solver Engine
 
-Paste or generate a board and let the solver analyze it.
-
-Available actions:
-
-- load a custom board,
-- check if it is solvable,
-- generate a solution map,
-- auto-solve inside the solver screen,
-- transfer the board to Play Mode.
+The Solver Engine accepts a custom board, checks whether it is solvable, generates a solution map, and can animate the solving process inside the solver screen.
 
 ---
 
-## Supported board sizes
-
-The app supports board sizes from:
+## Supported Board Sizes
 
 ```txt
 0×0 to 30×30
 ```
 
-Notes:
-
-- `0×0` is treated as a safe empty boundary case.
-- Real playable boards start from `1×1`.
-- Larger boards use the same GF(2) solver engine.
+`0×0` is treated as a safe empty boundary case. Real playable puzzles start from `1×1`.
 
 ---
 
-## Map format
+## Map Format
 
-You can share or load boards using a compact text format.
-
-### Header format
+Header format:
 
 ```txt
 5x5:01010/00100/11100/00010/01001
 ```
 
-### Multiline format
+Multiline format:
 
 ```txt
 01010
@@ -189,176 +136,88 @@ You can share or load boards using a compact text format.
 01001
 ```
 
-For a board map:
+Meaning:
 
 ```txt
-1 = light is on
-0 = light is off
-```
-
-For a solution map:
-
-```txt
-1 = this cell should be pressed
-0 = this cell should not be pressed
+Board map:     1 = light on, 0 = light off
+Solution map:  1 = press this cell, 0 = do not press this cell
 ```
 
 ---
 
-## The math behind the solver
+## How the Solver Works
 
-Lights Out can be represented as a linear system over **GF(2)**.
+Lights Out can be written as a binary linear system:
 
-GF(2) means a field with only two values:
+```txt
+A × x = b
+```
+
+| Symbol | Meaning |
+|---|---|
+| `A` | Toggle-effect matrix |
+| `x` | Press vector, meaning which cells should be clicked |
+| `b` | Current board state |
+
+Each light is either off or on, so the board naturally fits **GF(2)**, a field with only two values:
 
 ```txt
 0 and 1
 ```
 
-This is perfect for Lights Out because each light has only two states:
-
-```txt
-0 = off
-1 = on
-```
-
-Pressing a cell toggles affected cells:
+A press toggles a light:
 
 ```txt
 0 -> 1
 1 -> 0
 ```
 
-That is the same as XOR, or addition modulo 2.
+This is XOR behavior, also known as addition modulo 2.
 
----
-
-## Linear system model
-
-The board is modeled as:
-
-```txt
-A × x = b
-```
-
-Where:
-
-| Symbol | Meaning |
-|---|---|
-| `A` | Toggle-effect matrix |
-| `x` | Unknown press vector |
-| `b` | Current board state |
-
-Each column of `A` describes what happens when one specific cell is pressed.
-
-The solver tries to find `x`, meaning:
-
-```txt
-which cells should be pressed to turn all lights off
-```
-
----
-
-## Algorithm details
-
-The solver uses **Gaussian elimination over GF(2)**.
-
-Instead of normal arithmetic, every operation is binary:
-
-```txt
-1 + 1 = 0
-1 + 0 = 1
-0 + 0 = 0
-```
-
-In JavaScript, this is naturally handled with XOR operations.
-
-The implementation also stores matrix rows as `BigInt` bitsets, so row elimination can be done compactly:
+The solver uses **Gaussian elimination over GF(2)**. Matrix rows are stored as `BigInt` bitsets, so binary row elimination can be done efficiently with XOR:
 
 ```js
 A[r] ^= A[row];
 ```
 
-That single operation applies a binary row elimination step.
-
----
-
-## Solvability detection
-
-The same Gaussian elimination process also checks whether a board is solvable.
-
-If elimination produces a contradiction like this:
+During elimination, if the system reaches a contradiction like:
 
 ```txt
 0 = 1
 ```
 
-then the puzzle is impossible to solve.
-
-In code, that state is detected and the solver returns:
-
-```js
-null
-```
-
-If there is no contradiction, the solver returns a valid press path.
+then the board is not solvable. Otherwise, the solver returns a valid press path.
 
 ---
 
-## Puzzle generation logic
+## Puzzle Generation
 
-Random puzzles in Play Mode are generated from the solved state.
-
-The app starts with an all-off board, then applies a set of random valid presses.
-
-Because the puzzle is created by real moves, it is guaranteed to be reachable from the solved state.
-
-The solver is still used afterward as a safety check.
+Random puzzles are generated from the solved state by applying random valid presses. Because the board is created through real moves, it is reachable from the solved state. The solver is still used afterward as a safety check.
 
 ---
 
-## Is the solution always the shortest?
+## Note About Optimality
 
-No.
+The solver returns **a valid solution**, not necessarily the shortest possible solution.
 
-The solver returns a **valid solution**, not necessarily the minimum-move solution.
-
-Finding the absolute shortest solution can be much more expensive, especially for larger boards.
-
-For this project, the priority was:
-
-- correctness,
-- reliable solvability checking,
-- broad board-size support,
-- clean implementation,
-- and a useful interactive interface.
+Finding the absolute minimum-move solution can be much more expensive for larger boards, so this project prioritizes reliability, clear logic, and broad board-size support.
 
 ---
 
-## How to run
-
-### Option 1: Download ZIP
-
-1. Click the **Download Full Project ZIP** button near the top of this README.
-2. Extract the ZIP file.
-3. Open `index.html` in your browser.
-
-### Option 2: Clone the repository
-
-```bash
-git clone https://github.com/TheLouisMahdi/lights-out-gf2-solver.git
-cd lights-out-gf2-solver
-```
-
-Then open:
+## Tech Stack
 
 ```txt
-index.html
+HTML
+CSS
+Vanilla JavaScript
+BigInt bitset operations
+No build step
+No external runtime dependencies
 ```
 
 ---
 
-## File structure
+## File Structure
 
 ```txt
 lights-out-gf2-solver/
@@ -370,24 +229,9 @@ lights-out-gf2-solver/
 
 ---
 
-## Tech stack
-
-- HTML
-- CSS
-- Vanilla JavaScript
-- BigInt bitset operations
-- No external runtime dependencies
-- No build step
-
----
-
 ## Credits
 
 Developed by **THELOUISMAHDI**.
-
-This project began as a simple Linear Algebra assignment and was later expanded into a complete Lights Out solving engine.
-
-The final UI polish, cyber-terminal presentation, and README organization were refined with assistance from ChatGPT.
 
 <div align="center">
 
